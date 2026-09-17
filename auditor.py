@@ -1,3 +1,36 @@
+# Week 2 Requirements
+""" 
+1. Initialize the inventory to zero in the start
+2. Run in a continuous loop asking user to enter a stock quantity, until the
+user types quit.
+3. If the user enters a valid value:
+• Add the delivery amount to the running total.
+• Calculate the tax for that delivery.
+• Update any counters and records you are tracking, such as the number
+of deliveries processed.
+4. Reporting: When the user types quit, print the Total Deliveries Processed
+and the Number of Failed/Rejected Entries.
+"""
+
+
+""" 
+Your program must now consist of specific functions:
+1. get_valid_input(): Handles the prompt, handles input validation, and
+returns a valid integer or a "quit" signal.
+2. process_delivery(current_total, new_value): Calculates the new total and
+returns it.
+3. calculate_tax(amount): A new requirement! This function takes a delivery
+amount and returns the tax (10% of that specific delivery).
+4. generate_report(total_units, failed_attempts): A dedicated function to print
+the final summary.
+"""
+
+# 1. get_valid_input(): Handles the prompt, handles input validation, and
+# returns a valid integer or a "quit" signal.
+
+
+
+
 total_inventory = 0
 errors = 0 
 total_processed_inventory = 0
@@ -7,35 +40,37 @@ def check_user_input(user_input):
     #isdigit only returns True for digits 
     #returns false for negative 
     #we should check for whether its digit or negative value
-    return user_input.strip().isdigit()
+    if (user_input.isdigit()):
+        return user_input.strip().isdigit()
+    elif (user_input == "quit"):
+        return "quit"
 
 
+# while True: 
+#     # 1. Initialize the inventory to zero in the start
+#     user_input = input("Please enter stock value: or type `quit` to kill the program: ")
+#     if (user_input).lower() == "quit":
+#         print("Program quit!")
+#         print("Number of Failed/Rejected Entries: ", errors)
+#         #need to print total processed
+#         print("Total Units Processed Inventory: " , total_processed_inventory)
+#         break
+#     #logic of my operations
+#     elif (check_user_input(user_input)):
+#         stock_value = int(user_input)
+#         #add valid user input into total_inventory 
+#         total_inventory+=stock_value
+#         print("Total inventory: " ,total_inventory)
+#         #add valid user input into total_processed_inventory
+#         total_processed_inventory+=stock_value
 
-while True: 
-    # 1. Initialize the inventory to zero in the start
-    user_input = input("Please enter stock value: or type `quit` to kill the program: ")
-    if (user_input).lower() == "quit":
-        print("Program quit!")
-        print("Number of Failed/Rejected Entries: ", errors)
-        #need to print total processed
-        print("Total Units Processed Inventory: " , total_processed_inventory)
-        break
-    #logic of my operations
-    elif (check_user_input(user_input)):
-        stock_value = int(user_input)
-        #add valid user input into total_inventory 
-        total_inventory+=stock_value
-        print("Total inventory: " ,total_inventory)
-        #add valid user input into total_processed_inventory
-        total_processed_inventory+=stock_value
+#         # 7. Trigger Overstock Alert: If the total inventory exceeds 500 units, print an
+#         # alert and break the loop immediately. (keep in mind of the conditional flow we
+#         # discussed this week: if, elif and else)
+#         if (total_inventory > 500):
+#             print("My total inventory has exceeded capacity!!!")
+#             break
 
-        # 7. Trigger Overstock Alert: If the total inventory exceeds 500 units, print an
-        # alert and break the loop immediately. (keep in mind of the conditional flow we
-        # discussed this week: if, elif and else)
-        if (total_inventory > 500):
-            print("My total inventory has exceeded capacity!!!")
-            break
-
-    else: 
-        print("Please enter a valid integer. Eg. `1` ")
-        errors+=1
+#     else: 
+#         print("Please enter a valid integer. Eg. `1` ")
+#         errors+=1
