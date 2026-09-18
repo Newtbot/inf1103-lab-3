@@ -26,14 +26,14 @@ def check_user_input(user_input):
     # we should check for whether its digit or negative value
     if user_input.isdigit():
         return user_input.strip().isdigit()
-    elif (user_input).lower() == "quit":
+    elif (user_input).lower().strip() == "quit":
         return "quit"
 
 
 # 2. process_delivery(current_total, new_value): Calculates the new total and
 # returns it.
 def process_delivery(current_total, new_value):
-    current_total += new_value
+    current_total+= new_value
     return current_total  # total inventory / total process stock since we always start stock at 0
 
 
@@ -58,20 +58,21 @@ while True:
         print("Number of Failed/Rejected Entries:", errors)
         print("Total Units Processed Inventory:" , total_inventory)
         break
-    
+
     #logic of my operations
     elif (check_user_input(user_input)):
         stock_value = int(user_input)
-        #add valid user input into total_inventory
-        total_inventory+=stock_value
-        print("Total inventory: " ,total_inventory)
-        #add valid user input into total_processed_inventory
-        total_processed_inventory+=stock_value
+        #pass user input to process delivery for logic oprs
+        current_total = process_delivery(current_total, stock_value)
+        print("Total inventory:" , current_total )
 
+        #tax calculation
+        tax = calculate_tax(stock_value)
+        print("Total Tax for this Delivery:"  , tax)
         # 7. Trigger Overstock Alert: If the total inventory exceeds 500 units, print an
         # alert and break the loop immediately. (keep in mind of the conditional flow we
         # discussed this week: if, elif and else)
-        if (total_inventory > 500):
+        if (current_total > 500):
             print("My total inventory has exceeded capacity!!!")
             break
 
