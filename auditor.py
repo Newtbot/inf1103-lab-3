@@ -12,8 +12,9 @@ of deliveries processed.
 and the Number of Failed/Rejected Entries.
 """
 
-current_total = 0
-errors = 0
+current_total = 0 # stock handle 
+errors = 0 # errors 
+delivery_cost = 0 # delivery cost
 
 
 # 1. get_valid_input(): Handles the prompt, handles input validation, and
@@ -51,11 +52,13 @@ def generate_report(current_total, errors):
 while True:
     # 1. Initialize the inventory to zero in the start
     user_input = input("Please enter stock value: or type `quit` to kill the program: ")
-    if (user_input).lower() == "quit":
-        print("Number of Failed/Rejected Entries: ", errors)
-        #need to print total processed
-        print("Total Units Processed Inventory: " , total_processed_inventory)
+
+    if check_user_input(user_input) == "quit":
+        total_inventory , errors = generate_report(current_total, errors)
+        print("Number of Failed/Rejected Entries:", errors)
+        print("Total Units Processed Inventory:" , total_inventory)
         break
+    
     #logic of my operations
     elif (check_user_input(user_input)):
         stock_value = int(user_input)
